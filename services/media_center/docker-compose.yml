@@ -1,0 +1,30 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    volumes:
+      - '${JELLYFIN_ROOT}/config:/config'
+      - '${JELLYFIN_ROOT}/cache:/cache'
+      - '${JELLYFIN_ROOT}/media:/data/media'
+    # ports:
+      # - "8096:8096" # HTTP Port
+      # - "8920:8920" # HTTPS Port
+
+    ## Base Homelab config
+    hostname: ${JELLYFIN_HOSTNAME}
+    container_name: ${JELLYFIN_NAME}
+    network_mode: ${STACK_NETWORK}
+    restart: unless-stopped
+
+  jdownloader:
+    image: jlesage/jdownloader-2
+    volumes:
+      - "${JDOWNLOADER_ROOT}/media:/output:rw"
+      - "${JDOWNLOADER_ROOT}/config:/config:rw"
+    # ports:
+      # - "5800:5800"
+
+    ## Base Homelab config
+    hostname: ${JDOWNLOADER_HOSTNAME}
+    container_name: ${JDOWNLOADER_NAME}
+    network_mode: ${STACK_NETWORK}
+    restart: unless-stopped
