@@ -28,7 +28,6 @@ services:
 
   grafana:
     image: grafana/grafana-enterprise
-    restart: unless-stopped
     volumes:
       - ${GRAFANA_ROOT}/provisioning/datasources:/etc/grafana/provisioning/datasources
       - grafana_data:/var/lib/grafana
