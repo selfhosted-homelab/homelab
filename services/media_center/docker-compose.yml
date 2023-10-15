@@ -28,3 +28,17 @@ services:
     container_name: ${JDOWNLOADER_NAME}
     network_mode: ${STACK_NETWORK}
     restart: unless-stopped
+
+  kavita:
+    image: kizaing/kavita:latest
+    volumes:
+        - ${KAVITA_ROOT}/media/manga:/manga
+        - ${KAVITA_ROOT}/media/book:/book
+        - ${KAVITA_ROOT}/data:/kavita/config
+    # ports:
+        # - "5000:5000"
+    ## Base Homelab config
+    hostname: ${KAVITA_HOSTNAME}
+    container_name: ${KAVITA_NAME}
+    network_mode: ${STACK_NETWORK}
+    restart: unless-stopped
