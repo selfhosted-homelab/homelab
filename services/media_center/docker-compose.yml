@@ -1,13 +1,13 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin:latest
+    image: jellyfin/jellyfin
     volumes:
       - '${JELLYFIN_ROOT}/config:/config'
       - '${JELLYFIN_ROOT}/cache:/cache'
       - '${JELLYFIN_ROOT}/media:/data/media'
-    # ports:
-      # - "8096:8096" # HTTP Port
-      # - "8920:8920" # HTTPS Port
+    ports:
+      - "8096:8096" # HTTP Port
+      - "8920:8920" # HTTPS Port
 
     ## Base Homelab config
     hostname: ${JELLYFIN_HOSTNAME}
@@ -20,8 +20,8 @@ services:
     volumes:
       - "${JDOWNLOADER_ROOT}/media:/output:rw"
       - "${JDOWNLOADER_ROOT}/config:/config:rw"
-    # ports:
-      # - "5800:5800"
+    ports:
+      - "5800:5800"
 
     ## Base Homelab config
     hostname: ${JDOWNLOADER_HOSTNAME}
@@ -30,13 +30,14 @@ services:
     restart: unless-stopped
 
   kavita:
-    image: kizaing/kavita:latest
+    image: kizaing/kavita
     volumes:
         - ${KAVITA_ROOT}/media/manga:/manga
         - ${KAVITA_ROOT}/media/book:/book
         - ${KAVITA_ROOT}/data:/kavita/config
-    # ports:
-        # - "5000:5000"
+    ports:
+      - "5000:5000"
+  
     ## Base Homelab config
     hostname: ${KAVITA_HOSTNAME}
     container_name: ${KAVITA_NAME}
