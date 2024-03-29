@@ -14,21 +14,6 @@ services:
     container_name: ${JELLYFIN_NAME}
     network_mode: ${STACK_NETWORK}
     restart: unless-stopped
-  
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    environment:
-      - TZ=Europe/Paris
-    # ports:
-      # - 5055:5055
-    volumes:
-      - '${JELLYSEER_ROOT}/config:/app/config'
-      
-    ## Base Homelab config
-    hostname: ${JELLYSEER_HOSTNAME}
-    container_name: ${JELLYSEER_NAME}
-    network_mode: ${STACK_NETWORK}
-    restart: unless-stopped
 
   jdownloader:
     image: jlesage/jdownloader-2
