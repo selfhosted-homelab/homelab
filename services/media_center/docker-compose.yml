@@ -1,3 +1,7 @@
+volumes:
+  photoview_data:
+    name: 'mediacenter_photoview_data'
+
 services:
   jellyfin:
     image: jellyfin/jellyfin:latest
@@ -56,5 +60,30 @@ services:
     ## Base Homelab config
     hostname: ${KAVITA_HOSTNAME}
     container_name: ${KAVITA_NAME}
+    network_mode: ${STACK_NETWORK}
+    restart: unless-stopped
+
+  photowiew:
+    image: viktorstrate/photoview:2
+    
+    # ports:
+    #  - "8000:80"
+    
+    environment:
+      - PHOTOVIEW_LISTEN_IP=photoview
+      - PHOTOVIEW_LISTEN_PORT=80
+      - PHOTOVIEW_MEDIA_CACHE=/app/cache
+      - PHOTOVIEW_DATABASE_DRIVER=sqlite
+      - PHOTOVIEW_SQLITE_PATH=/app/database/photoview.db
+      - MAPBOX_TOKEN=${PHOTOVIEW_MAPBOX_TOKEN}
+
+    volumes:
+      - photoview_data:/app/cache
+      - '${PHOTOVIEW_ROOT}/database:/app/database'
+      - '${PHOTOVIEW_ROOT}/media/photos:/photos:ro'
+
+    ## Base Homelab config
+    hostname: ${PHOTOVIEW_HOSTNAME}
+    container_name: ${PHOTOVIEW_NAME}
     network_mode: ${STACK_NETWORK}
     restart: unless-stopped
