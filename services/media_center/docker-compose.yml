@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     volumes:
       - '${JELLYFIN_ROOT}/config:/config'
       - '${JELLYFIN_ROOT}/cache:/cache'
@@ -14,7 +14,22 @@ services:
     container_name: ${JELLYFIN_NAME}
     network_mode: ${STACK_NETWORK}
     restart: unless-stopped
+  
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    environment:
+      - TZ=Europe/Paris
+    # ports:
+      # - 5055:5055
+    volumes:
+      - '${JELLYSEER_ROOT}/config:/app/config'
 
+    ## Base Homelab config
+    hostname: ${JELLYSEER_HOSTNAME}
+    container_name: ${JELLYSEER_NAME}
+    network_mode: ${STACK_NETWORK}
+    restart: unless-stopped
+  
   jdownloader:
     image: jlesage/jdownloader-2
     volumes:
@@ -30,7 +45,7 @@ services:
     restart: unless-stopped
 
   kavita:
-    image: kizaing/kavita
+    image: kizaing/kavita:latest
     volumes:
         - ${KAVITA_ROOT}/media/manga:/manga
         - ${KAVITA_ROOT}/media/book:/book
