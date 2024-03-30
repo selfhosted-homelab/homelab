@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
 
   kavita:
-    image: kizaing/kavita:latest
+    image: jvmilazz0/kavita:latest
     volumes:
         - ${KAVITA_ROOT}/media/manga:/manga
         - ${KAVITA_ROOT}/media/book:/book
