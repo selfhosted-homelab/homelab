@@ -9,9 +9,10 @@ services:
       - '${JELLYFIN_ROOT}/config:/config'
       - '${JELLYFIN_ROOT}/cache:/cache'
       - '${JELLYFIN_ROOT}/media:/data/media'
-    ports:
-      - "8096:8096" # HTTP Port
-      - "8920:8920" # HTTPS Port
+  
+    # ports:
+      # - "8096:8096" # HTTP Port
+      # - "8920:8920" # HTTPS Port
 
     ## Base Homelab config
     hostname: ${JELLYFIN_HOSTNAME}
@@ -23,8 +24,10 @@ services:
     image: fallenbagel/jellyseerr:latest
     environment:
       - TZ=Europe/Paris
+  
     # ports:
       # - 5055:5055
+  
     volumes:
       - '${JELLYSEER_ROOT}/config:/app/config'
 
@@ -39,8 +42,9 @@ services:
     volumes:
       - "${JDOWNLOADER_ROOT}/media:/output:rw"
       - "${JDOWNLOADER_ROOT}/config:/config:rw"
-    ports:
-      - "5800:5800"
+  
+    # ports:
+      # - "5800:5800"
 
     ## Base Homelab config
     hostname: ${JDOWNLOADER_HOSTNAME}
