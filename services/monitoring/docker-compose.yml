@@ -81,3 +81,17 @@ services:
     network_mode: ${STACK_NETWORK}
     restart: unless-stopped
 
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    volumes:
+      - '${UPTIME_KUMA_ROOT}/data:/app/data'
+      - /var/run/docker.sock:/var/run/docker.sock
+    # ports:
+      # - 3001:3001
+  
+    ## Base Homelab config
+    hostname: ${UPTIME_KUMA_HOSTNAME}
+    container_name: ${UPTIME_KUMA_NAME}
+    network_mode: ${STACK_NETWORK}
+    restart: unless-stopped
+  
